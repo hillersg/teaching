@@ -40,6 +40,9 @@ def aux_plot_modeldecomposition(n,data,newdata,dataargument,decompose):
     axes[0].set_ylabel('Amplitude');
     axes[0].legend(bbox_to_anchor=(1.05, 0.95), loc='upper right', borderaxespad=0.);
 
+    alpha = []
+    beta  = []
+
     if decompose: 
         # never mind some magic ...
         # build model vectors based on sine and cosine functions
@@ -52,13 +55,13 @@ def aux_plot_modeldecomposition(n,data,newdata,dataargument,decompose):
         #print("The sine- and cosine-weights are %5.3f, %5.3f"%(alpha, beta));
         model = alpha * model_sin + beta * model_cos;
 
-        axes[0].plot(n,model,'k--',label='model');                     
+        axes[0].plot(n,model,'k--',linewidth=2,dashes=(5, 3),label='model');                     
         axes[0].set_title('Data and model');                
         axes[0].legend(bbox_to_anchor=(1.05, 0.95), loc='upper right', borderaxespad=0.);
 
         axes[1].plot(n,alpha*model_sin,'m',label='sine-part');
         axes[1].plot(n,beta*model_cos,'c',label='cosine-part');
-        axes[1].plot(n,model,'k',label='model');
+        axes[1].plot(n,model,'k--',linewidth=2,dashes=(5, 3),label='model');
         axes[1].set_yticks([-1, 0, 1]);
         axes[1].set_xlabel('n');
         axes[1].set_title('Model decomposition');
@@ -66,4 +69,4 @@ def aux_plot_modeldecomposition(n,data,newdata,dataargument,decompose):
 
     plt.show()
 
-    return
+    return alpha, beta
